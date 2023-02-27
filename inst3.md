@@ -70,3 +70,9 @@ def post_details(id):
     article = Articles.query.get(id)
     results = article_schema.jsonify(article)
     return results
+
+
+# optimize the get method:
+
+from flask_cors import CORS
+CORS(app)
