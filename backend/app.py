@@ -39,7 +39,7 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/get', methods=['GET'])
+@app.route('/get/', methods=['GET'])
 def get_articles():
     all_articles = Articles.query.all()
     results = articles_schema.dump(all_articles)
@@ -74,6 +74,15 @@ def update_article(id):
     article.title = title
     article.body = body
 
+    db.session.commit()
+    results = article_schema.jsonify(article)
+    return results
+
+
+@app.route('/delete/<id>/', methods=['DELETE'])
+def delete_article(id):
+    article = Articles.query.get(id)
+    db.session.delete(article)
     db.session.commit()
     results = article_schema.jsonify(article)
     return results
