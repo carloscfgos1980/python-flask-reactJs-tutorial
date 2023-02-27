@@ -34,3 +34,13 @@ def get_articles():
     all_articles = Articles.query.all()
     results = articles_schema.dump(all_articles)
     return jsonify(results)
+
+# GET single article
+
+@app.route('/get/<id>/', methods=['GET'])
+def post_details(id):
+    article = Articles.query.get(id)
+    results = article_schema.jsonify(article)
+    return results
+
+* This allow us to get the article by the id
