@@ -44,3 +44,20 @@ def post_details(id):
     return results
 
 * This allow us to get the article by the id
+
+
+# Update. PUT method
+
+@app.route('/update/<id>/', methods=['PUT'])
+def update_article(id):
+    article = Articles.query.get(id)
+
+    title = request.json['title']
+    body = request.json['body']
+
+    article.title = title
+    article.body = body
+
+    db.session.commit()
+    results = article_schema.jsonify(article)
+    return results
