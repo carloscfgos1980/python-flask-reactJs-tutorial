@@ -13,18 +13,38 @@ function App() {
       }
     })
       .then(resp => resp.json())
+      .then(resp => setArticles(resp))
       .then(resp => console.log(resp))
       .catch(error => console.log(error))
 
   }, [])
 
 
-
+  //console.log("checking", articles)
 
   return (
     <div className="App">
       <h1>Full stack course</h1>
 
+      {articles === 'undefined' ?
+        (
+          <div>loading...</div>
+        ) : (
+          <div>
+            {
+              articles.map(article => {
+                return (
+                  <div key={article.id}>
+                    <h2>{article.title}</h2>
+                    <p>{article.body}</p>
+                    <p>{article.date}</p>
+                  </div>
+                )
+              })
+            }
+          </div>
+        )
+      }
     </div>
   );
 }

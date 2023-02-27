@@ -21,3 +21,29 @@ import { useState, useEffect } from 'react'
       .catch(error => console.log(error))
 
   }, [])
+
+6. dispplay the articles on the DOM
+6.1 Set the resond with useState
+    .then(resp => setArticles(resp))
+    .then(resp => console.log(resp))
+
+6.2 Map the array of articles that we got from the database
+    {articles === 'undefined' ?
+        (
+          <div>loading...</div>
+        ) : (
+          <div>
+            {
+              articles.map(article => {
+                return (
+                  <div key={article.id}>
+                    <h2>{article.title}</h2>
+                    <p>{article.body}</p>
+                    <p>{article.date}</p>
+                  </div>
+                )
+              })
+            }
+          </div>
+        )
+      }
