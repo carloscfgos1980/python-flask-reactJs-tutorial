@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css';
+import ArticlesList from './components/ArticlesList';
 
 
 function App() {
@@ -25,26 +26,7 @@ function App() {
   return (
     <div className="App">
       <h1>Full stack course</h1>
-
-      {articles === 'undefined' ?
-        (
-          <div>loading...</div>
-        ) : (
-          <div>
-            {
-              articles.map(article => {
-                return (
-                  <div key={article.id}>
-                    <h2>{article.title}</h2>
-                    <p>{article.body}</p>
-                    <p>{article.date}</p>
-                  </div>
-                )
-              })
-            }
-          </div>
-        )
-      }
+      <ArticlesList articles={articles} />
     </div>
   );
 }
