@@ -1,4 +1,4 @@
-# Post method
+# POST method
 
 1. Import modules
 from flask import Flask, jsonify, request
@@ -26,3 +26,11 @@ def add_article():
     db.session.add(articles)
     db.session.commit()
     return article_schema.jsonify(articles)
+
+# GET method
+
+@app.route('/', methods=['GET'])
+def get_articles():
+    all_articles = Articles.query.all()
+    results = articles_schema.dump(all_articles)
+    return jsonify(results)
