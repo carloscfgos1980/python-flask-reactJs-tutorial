@@ -47,3 +47,6 @@ import { useState, useEffect } from 'react'
           </div>
         )
       }
+
+    7. Create components. 
+    ArticleList.js

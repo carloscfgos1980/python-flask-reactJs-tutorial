@@ -2,7 +2,13 @@
 
 import React from 'react'
 
-function ArticlesList({ articles }) {
+function ArticlesList({ articles, editArticle }) {
+
+  const editing = (item) => {
+    editArticle(item)
+  }
+
+
   return (
     <div>
       {
@@ -12,6 +18,16 @@ function ArticlesList({ articles }) {
               <h2>{article.title}</h2>
               <p>{article.body}</p>
               <p>{article.date}</p>
+              <div className='row'>
+                <div className='col-md-1'>
+                  <button className='btn btn-primary'
+                    onClick={() => editing(article)}
+                  >Update</button>
+                </div>
+                <div className='col'>
+                  <button className='btn btn-danger'>Delete</button>
+                </div>
+              </div>
             </div>
           )
         })
