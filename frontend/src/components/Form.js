@@ -1,19 +1,24 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import APIService from './APIService'
 
-function Form({ article }) {
-    const [title, setTitle] = useState(article.title)
-    const [body, setBody] = useState(article.body)
+function Form({ article, updatedData }) {
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+
+    useEffect(() => {
+        setTitle(article.title)
+        setBody(article.body)
+    }, [article])
+
+
 
     const updating = () => {
         APIService.UpdateArticle(article.id, { title, body })
+            .then(resp => updatedData(resp))
             .then(resp => console.log(resp))
             .catch(error => console.log(error))
-
     }
-
-
 
     return (
         <div>

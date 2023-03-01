@@ -6,7 +6,7 @@ import Form from './components/Form';
 
 function App() {
   const [articles, setArticles] = useState([])
-  const [editedArticle, setEdiitedArticle] = useState(null)
+  const [editedArticle, setEditedArticle] = useState(null)
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/get/', {
@@ -24,9 +24,19 @@ function App() {
 
   const editArticle = (item) => {
     //console.log("Hello World")
-    setEdiitedArticle(item)
+    setEditedArticle(item)
   }
 
+  const updatedData = (item) => {
+    const new_article = articles.map(my_article => {
+      if (my_article.id === item.id) {
+        return item
+      } else {
+        return my_article
+      }
+    })
+    setArticles(new_article)
+  }
 
 
 
@@ -36,7 +46,7 @@ function App() {
     <div className="App">
       <h1>Full stack course</h1>
       <ArticlesList articles={articles} editArticle={editArticle} />
-      {editedArticle ? <Form article={editedArticle} /> : null}
+      {editedArticle ? <Form article={editedArticle} updatedData={updatedData} /> : null}
 
     </div>
   );

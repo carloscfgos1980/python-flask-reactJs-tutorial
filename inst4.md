@@ -2,6 +2,7 @@
 
 1. Create react-app
 2. Clean the app
+* All thhe follow is done in app.js
 3. Import useState and useEffect:
 import { useState, useEffect } from 'react'
 
