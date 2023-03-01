@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import APIService from './APIService'
 
-function Form({ article, updatedData }) {
+function Form({ article, updatedData, insertData }) {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
@@ -16,6 +16,13 @@ function Form({ article, updatedData }) {
     const updating = () => {
         APIService.UpdateArticle(article.id, { title, body })
             .then(resp => updatedData(resp))
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error))
+    }
+
+    const inserting = () => {
+        APIService.InsertArticle({ title, body })
+            .then(resp => insertData(resp))
             .then(resp => console.log(resp))
             .catch(error => console.log(error))
     }
@@ -38,10 +45,18 @@ function Form({ article, updatedData }) {
                         placeholder='Please Enter Description'
                         onChange={(e) => setBody(e.target.value)}
                     />
-                    <button
-                        onClick={updating}
-                        className='btn btn-success mt-3'
-                    >Update</button>
+                    {article.id ?
+                        <button
+                            onClick={updating}
+                            className='btn btn-success mt-3'
+                        >Update</button>
+                        :
+                        <button
+                            onClick={inserting}
+                            className='btn btn-success mt-3'
+                        >Insert</button>
+                    }
+
                 </div>
             ) : null}
         </div>

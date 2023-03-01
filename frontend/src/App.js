@@ -38,15 +38,36 @@ function App() {
     setArticles(new_article)
   }
 
+  const openForm = () => {
+    setEditedArticle({ title: '', body: '' })
+  }
 
-
+  const insertData = (item) => {
+    const new_article = [...articles, item]
+    setArticles(new_article)
+  }
   //console.log("checking", articles)
 
   return (
     <div className="App">
-      <h1>Full stack course</h1>
+      <div className="row">
+        <div className="col">
+          <h1>Full stack course</h1>
+        </div>
+        <div className="col">
+          <button
+            className='btn btn-success'
+            onClick={openForm}
+          >Insert Article</button>
+        </div>
+      </div>
       <ArticlesList articles={articles} editArticle={editArticle} />
-      {editedArticle ? <Form article={editedArticle} updatedData={updatedData} /> : null}
+      {editedArticle ? <Form
+        article={editedArticle}
+        updatedData={updatedData}
+        insertData={insertData}
+      />
+        : null}
 
     </div>
   );
