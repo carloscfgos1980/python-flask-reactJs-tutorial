@@ -46,6 +46,16 @@ function App() {
     const new_article = [...articles, item]
     setArticles(new_article)
   }
+
+  const deleteArticle = (item) => {
+    const new_articles = articles.filter(my_article => {
+      if (my_article.id === item.id) {
+        return false;
+      }
+      return true
+    })
+    setArticles(new_articles)
+  }
   //console.log("checking", articles)
 
   return (
@@ -61,7 +71,10 @@ function App() {
           >Insert Article</button>
         </div>
       </div>
-      <ArticlesList articles={articles} editArticle={editArticle} />
+      <ArticlesList articles={articles}
+        editArticle={editArticle}
+        deleteArticle={deleteArticle}
+      />
       {editedArticle ? <Form
         article={editedArticle}
         updatedData={updatedData}

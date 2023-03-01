@@ -1,11 +1,16 @@
-
-
 import React from 'react'
+import APIService from './APIService'
 
-function ArticlesList({ articles, editArticle }) {
+function ArticlesList({ articles, editArticle, deleteArticle }) {
 
   const editing = (item) => {
     editArticle(item)
+  }
+
+  const deleting = (item) => {
+    APIService.DeleteArticle(item.id)
+      .then(() => deleteArticle(item))
+
   }
 
 
@@ -25,7 +30,10 @@ function ArticlesList({ articles, editArticle }) {
                   >Update</button>
                 </div>
                 <div className='col'>
-                  <button className='btn btn-danger'>Delete</button>
+                  <button
+                    className='btn btn-danger'
+                    onClick={() => deleting(article)}
+                  >Delete</button>
                 </div>
               </div>
             </div>
